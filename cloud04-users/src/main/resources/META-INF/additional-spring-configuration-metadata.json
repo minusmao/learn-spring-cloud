@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "ORDERS.ribbon.NFLoadBalancerRuleClassName",
+      "type": "java.lang.String",
+      "description": "Description for ORDERS.ribbon.NFLoadBalancerRuleClassName."
+    }
+  ]
+}

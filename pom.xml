@@ -19,6 +19,8 @@
     <modules>
         <module>cloud01-eureka-server</module>
         <module>cloud02-eureka-client</module>
+        <module>cloud04-users</module>
+        <module>cloud05-orders</module>
     </modules>
 
     <properties>

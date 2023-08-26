@@ -1,0 +1,12 @@
+server:
+  port: 9100
+spring:
+  application:
+    name: ORDERS    # 指定服务名称（唯一标识）
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 10    # 修改 eureka server 默认接受心跳的最大时间，默认是90s
+    lease-renewal-interval-in-seconds: 5        # 修改 eureka server 默认发送心跳的时间，默认是30s
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/    # 指定服务注册中心的地址（如果是集群则添加多个地址，用逗号分割）
