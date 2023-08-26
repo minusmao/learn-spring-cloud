@@ -21,6 +21,8 @@
         <module>cloud02-eureka-client</module>
         <module>cloud04-users</module>
         <module>cloud05-orders</module>
+        <module>cloud06-category</module>
+        <module>cloud07-product</module>
     </modules>
 
     <properties>

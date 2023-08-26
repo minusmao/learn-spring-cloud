@@ -1,0 +1,29 @@
+server:
+  port: 9200
+spring:
+  application:
+    name: CATEGORY    # 指定服务名称（唯一标识）
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 10    # 修改 eureka server 默认接受心跳的最大时间，默认是90s
+    lease-renewal-interval-in-seconds: 5        # 修改 eureka server 默认发送心跳的时间，默认是30s
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/    # 指定服务注册中心的地址（如果是集群则添加多个地址，用逗号分割）
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000    # 设置 feign 客户端默认连接超时时间（单位：ms）
+        readTimeout: 5000       # 设置 feign 客户端默认读取超时时间（单位：ms）
+      PRODUCT:    # 给指定服务配置的优先级大于 default
+        connectTimeout: 1500    # 设置 feign 客户端关于 PRODUCT 服务连接超时时间（单位：ms）
+        readTimeout: 1500       # 设置 feign 客户端关于 PRODUCT 服务读取超时时间（单位：ms）
+        logger-level: full      # 设置 feign 客户端关于 PRODUCT 服务的日志级别（full：输出所有日志）
+      ORDER:
+        logger-level: none      # 设置 feign 客户端关于 ORDER 服务的日志级别（none：不输出日志）
+logging:
+  level:
+    com:
+      example:
+        client: debug         # 设置 com.example.client 包下的日志级别
