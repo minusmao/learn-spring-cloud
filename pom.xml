@@ -23,6 +23,9 @@
         <module>cloud05-orders</module>
         <module>cloud06-category</module>
         <module>cloud07-product</module>
+        <module>cloud08-hystrix</module>
+        <module>cloud09-feign-hystrix</module>
+        <module>cloud10-hystrix-dashboard</module>
     </modules>
 
     <properties>
