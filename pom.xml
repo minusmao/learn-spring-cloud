@@ -26,6 +26,7 @@
         <module>cloud08-hystrix</module>
         <module>cloud09-feign-hystrix</module>
         <module>cloud10-hystrix-dashboard</module>
+        <module>cloud11-gateway</module>
     </modules>
 
     <properties>

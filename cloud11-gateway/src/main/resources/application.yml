@@ -1,0 +1,44 @@
+server:
+  port: 9700
+spring:
+  application:
+    name: GATEWAY    # 指定服务名称（唯一标识）
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true    # 开启从注册中心动态创建路由的功能，利用微服务名进行路由
+      routes:
+        - id: product_router #路由对象唯一标识
+          #uri: http://localhost:8788 #用来类别服务地址  http://localhost:8788/list
+          uri: lb://PRODUCT   #实现请求负载均衡处理 /product/product/list
+          predicates: #断言 用来配置路由规则
+            - Path=/product/**
+            #- After=2021-04-20T10:20:22.124+08:00[Asia/Shanghai]
+            #- Before=2021-04-20T10:23:22.124+08:00[Asia/Shanghai]
+            #- Between=2021-04-20T10:23:22.124+08:00[Asia/Shanghai],2021-04-20T10:25:22.124+08:00[Asia/Shanghai]
+            #- Cookie=name,chenyn
+            #- Cookie=name,[A-Za-z0-9]+
+            #- Header=X-Request-Id,\d+
+            #- Method=GET
+          filters:
+            - AddRequestHeader=User-Name, chenyn
+            - AddRequestParameter=color, blue
+            - AddResponseHeader=X-Response-Red, Blue
+            #- PrefixPath=/product #加入指定前缀filter
+            - StripPrefix=1 #去掉请求路径中n级前缀
+
+        - id: category_router #路由对象唯一标识
+          #uri: http://localhost:8787 #用来类别服务地址  http://localhost:8787/list
+          uri: lb://CATEGORY
+          predicates: #断言 用来配置路由规则
+            - Path=/category/**
+          filters:
+            - StripPrefix=1  # /list
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 10    # 修改 eureka server 默认接受心跳的最大时间，默认是90s
+    lease-renewal-interval-in-seconds: 5        # 修改 eureka server 默认发送心跳的时间，默认是30s
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/    # 指定服务注册中心的地址（如果是集群则添加多个地址，用逗号分割）
